@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="phamhieucomputer" Class="phamhieucomputerDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.;Initial Catalog=phamhieucomputer;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="phamhieucomputerConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.chitietchungloai" Member="chitietchungloais">
+    <Type Name="chitietchungloai">
+      <Column Name="idchitietCL" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idCL" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TenChiTietCL" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ThuTu" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AnHien" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
+      <Association Name="chitietchungloai_sanpham" Member="sanphams" ThisKey="idchitietCL" OtherKey="idchitietCL" Type="sanpham" />
+      <Association Name="chungloai_chitietchungloai" Member="chungloai" ThisKey="idCL" OtherKey="idCL" Type="chungloai" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.chungloai" Member="chungloais">
+    <Type Name="chungloai">
+      <Column Name="idCL" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TenCL" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ThuTu" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AnHien" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
+      <Association Name="chungloai_chitietchungloai" Member="chitietchungloais" ThisKey="idCL" OtherKey="idCL" Type="chitietchungloai" />
+      <Association Name="chungloai_sanpham" Member="sanphams" ThisKey="idCL" OtherKey="idCL" Type="sanpham" />
+    </Type>
+  </Table>
+  <Table Name="dbo.donhang" Member="donhangs">
+    <Type Name="donhang">
+      <Column Name="idDH" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idUser" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ThoiDiemDatHang" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="TenNguoiNhan" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="DiaDiemGiaoHang" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="trangthai" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="donhang_donhangchitiet" Member="donhangchitiets" ThisKey="idDH" OtherKey="idDH" Type="donhangchitiet" />
+      <Association Name="trangthai_donhang" Member="trangthai1" ThisKey="trangthai" OtherKey="matt" Type="trangthai" IsForeignKey="true" />
+      <Association Name="user_donhang" Member="user" ThisKey="idUser" OtherKey="idUser" Type="user" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.donhangchitiet" Member="donhangchitiets">
+    <Type Name="donhangchitiet">
+      <Column Name="idChiTiet" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idDH" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idSP" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SoLuong" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Gia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="donhang_donhangchitiet" Member="donhang" ThisKey="idDH" OtherKey="idDH" Type="donhang" IsForeignKey="true" />
+      <Association Name="sanpham_donhangchitiet" Member="sanpham" ThisKey="idSP" OtherKey="idSP" Type="sanpham" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.lienket" Member="lienkets">
+    <Type Name="lienket">
+      <Column Name="idWebLink" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Ten" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Url" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ThuTu" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.loaisp" Member="loaisps">
+    <Type Name="loaisp">
+      <Column Name="idLoai" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idCL" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TenLoai" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="TenLoai_KhongDau" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ThuTu" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AnHien" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="loaisp_sanpham" Member="sanphams" ThisKey="idLoai" OtherKey="idLoai" Type="sanpham" />
+    </Type>
+  </Table>
+  <Table Name="dbo.pages" Member="pages">
+    <Type Name="page">
+      <Column Name="idPage" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="pageName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="fileName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="pageTitle" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="metaKeyword" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="metaDescription" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.quang_cao" Member="quang_caos">
+    <Type Name="quang_cao">
+      <Column Name="idQC" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MoTa" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Url" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="urlHinh" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="idLT" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idViTri" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SoLanClick" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sanpham" Member="sanphams">
+    <Type Name="sanpham">
+      <Column Name="idSP" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idLoai" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idCL" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idchitietCL" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TenSP" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="TenSP_KhongDau" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="MoTa" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="NgayCapNhat" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Gia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UrlHinh" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="baiviet" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="SoLanXem" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SoLuongTonKho" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SoLanMua" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AnHien" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="sanpham_donhangchitiet" Member="donhangchitiets" ThisKey="idSP" OtherKey="idSP" Type="donhangchitiet" />
+      <Association Name="sanpham_sanpham_comment" Member="sanpham_comments" ThisKey="idSP" OtherKey="idSP" Type="sanpham_comment" />
+      <Association Name="sanpham_sanpham_hinh" Member="sanpham_hinhs" ThisKey="idSP" OtherKey="idSP" Type="sanpham_hinh" />
+      <Association Name="sanpham_sanpham_thuoctinh" Member="sanpham_thuoctinhs" ThisKey="idSP" OtherKey="idSP" Type="sanpham_thuoctinh" />
+      <Association Name="sanpham_sanpham_thuoctinh_laptop" Member="sanpham_thuoctinh_laptops" ThisKey="idSP" OtherKey="idSP" Type="sanpham_thuoctinh_laptop" />
+      <Association Name="sanpham_sanpham_youtube" Member="sanpham_youtubes" ThisKey="idSP" OtherKey="idSP" Type="sanpham_youtube" />
+      <Association Name="chitietchungloai_sanpham" Member="chitietchungloai" ThisKey="idchitietCL" OtherKey="idchitietCL" Type="chitietchungloai" IsForeignKey="true" />
+      <Association Name="chungloai_sanpham" Member="chungloai" ThisKey="idCL" OtherKey="idCL" Type="chungloai" IsForeignKey="true" />
+      <Association Name="loaisp_sanpham" Member="loaisp" ThisKey="idLoai" OtherKey="idLoai" Type="loaisp" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sanpham_comment" Member="sanpham_comments">
+    <Type Name="sanpham_comment">
+      <Column Name="id_comment" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idSP" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="hoten" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="tieude" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="noidung" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ngay_comment" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="kiem_duyet" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
+      <Association Name="sanpham_sanpham_comment" Member="sanpham" ThisKey="idSP" OtherKey="idSP" Type="sanpham" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sanpham_hinh" Member="sanpham_hinhs">
+    <Type Name="sanpham_hinh">
+      <Column Name="id_hinh" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idSP" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="urlHinh" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="stt" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="anhien" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
+      <Association Name="sanpham_sanpham_hinh" Member="sanpham" ThisKey="idSP" OtherKey="idSP" Type="sanpham" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sanpham_thuoctinh" Member="sanpham_thuoctinhs">
+    <Type Name="sanpham_thuoctinh">
+      <Column Name="id_thuoctinh" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idSP" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="tinh_nang_noi_bat" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="may_anh" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="dac_tinh_may_anh" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="may_phu_anh" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="video_call" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="quay_phim" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="xem_phim" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="nghe_nhac" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="fm_radio" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="xem_tivi" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ghi_am" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="ghi_am_cuoc_goi" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="ghi_am_fm" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="java" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="tro_choi" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="ket_noi_tv" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="ung_dung_van_phong" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="ung_dung_khac" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="nhacchuong_loai" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="nhacchuong_tai_nhac" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="nhacchuong_loa_ngoai" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="nhacchuong_bao_rung" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="nhacchuong_jack_tai_nghe" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="bonho_bo_nho_trong" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="bonho_ram" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="bonho_vi_xu_ly_cpu" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="bonho_the_nho_ngoai" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="bonho_ho_tro_the_toi_da" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="danh_ba" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="tin_nhan" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="email" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Association Name="sanpham_sanpham_thuoctinh" Member="sanpham" ThisKey="idSP" OtherKey="idSP" Type="sanpham" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sanpham_thuoctinh_laptop" Member="sanpham_thuoctinh_laptops">
+    <Type Name="sanpham_thuoctinh_laptop">
+      <Column Name="id_thuoctinh" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idSP" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="hang_cpu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="cong_nghe_cpu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="loai_cpu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="toc_do_cpu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="bo_nho_dem" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="toc_do_toi_da" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="chipset" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="toc_do_bus_chip" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ho_tro_ram_toi_da" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dung_luong_ram" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="loai_ram" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="toc_do_bus_ram" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="loai_o_dia" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="dung_luong_o_dia" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="kich_thuoc_man_hinh" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="do_phan_giai" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="cong_nghe_man_hinh" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="cam_ung" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="chipset_do_hoa" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="bo_nho_do_hoa" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="thiet_ke_card" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="kenh_am_thanh" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="cong_nghe_am_thanh" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="thong_tin_them_am_thanh" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="tich_hop_dia_quang" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="loai_dia_quang" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="cong_giao_tiep" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="tinh_nang_mo_rong" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="cong_lan" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="chuan_wifi" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ket_noi_khong_day_khac" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="doc_the_nho" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="khe_doc_the_nho" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="do_phan_giai_wc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="thong_tin_them_wc" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="thong_tin_pin" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="thoi_gian_su_dung" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="hdh_kem_theo" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="phan_mem_co_san" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="kich_thuoc" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="trong_luong" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Association Name="sanpham_sanpham_thuoctinh_laptop" Member="sanpham" ThisKey="idSP" OtherKey="idSP" Type="sanpham" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sanpham_youtube" Member="sanpham_youtubes">
+    <Type Name="sanpham_youtube">
+      <Column Name="id_youtube" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idSP" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="value" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="mota" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="stt" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="anhien" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
+      <Association Name="sanpham_sanpham_youtube" Member="sanpham" ThisKey="idSP" OtherKey="idSP" Type="sanpham" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.trangthai" Member="trangthais">
+    <Type Name="trangthai">
+      <Column Name="matt" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="tentt" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="trangthai_donhang" Member="donhangs" ThisKey="matt" OtherKey="trangthai" Type="donhang" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tygia_ngoaite" Member="tygia_ngoaites">
+    <Type Name="tygia_ngoaite">
+      <Column Name="id_ngoaite" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ky_hieu" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ten_ngoai_te" Type="System.String" DbType="NVarChar(70) NOT NULL" CanBeNull="false" />
+      <Column Name="ti_gia" Type="System.Decimal" DbType="Decimal(10,0) NOT NULL" CanBeNull="false" />
+      <Column Name="stt" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="anhien" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.userlog" Member="userlogs">
+    <Type Name="userlog">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idUser" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IPAddress" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastLoginDate" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="LastAvtiveDate" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="Session" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="user_userlog" Member="user" ThisKey="idUser" OtherKey="idUser" Type="user" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.users" Member="users">
+    <Type Name="user">
+      <Column Name="idUser" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="HoTen" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Dienthoai" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="NgayDangKy" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="idGroup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NgaySinh" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="GioiTinh" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="Active" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RandomKey" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="LoginNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DisableDate" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="Expiration" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Hinh" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="user_donhang" Member="donhangs" ThisKey="idUser" OtherKey="idUser" Type="donhang" />
+      <Association Name="user_userlog" Member="userlogs" ThisKey="idUser" OtherKey="idUser" Type="userlog" />
+    </Type>
+  </Table>
+</Database>

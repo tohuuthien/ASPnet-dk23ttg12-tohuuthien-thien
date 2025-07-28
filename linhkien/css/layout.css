@@ -1,0 +1,31 @@
+﻿*{margin: 0px; padding: 0px;}
+body{ font-family:Tahoma Arial 'Times New Roman';}
+#container{ width:1000px; margin: 0px auto;}
+#banner{ height:120px; background-color:Orange; text-align: center;}
+#menu{ height:25px; margin-top:5px; margin-bottom:5px; background-color:Yellow}
+#content{width:inherit;}
+#left{ width:260px; min-height:600px; float:left; padding: 5px; background-color: lightgoldenrodyellow; height: auto;}
+#right{ width:720px; min-height:600px; float:right; padding: 5px; background-color: lightgreen;}
+#bottom {height:30px; background-color:Orange; clear:both; text-align: center;}
+.block{ margin:5px; border:1px solid blue; padding: 5px; border-radius: 5px;}
+.tieude{margin-bottom:5px; padding:5px; text-align:center; display:block; background-color:Black; color:Yellow; font-weight:bold; font-size:large;}
+.item{ font-weight:bold; padding:5px ; font-size:16px}
+.noidung{ min-height:50px;}
+/*Default*/
+.motsp{ width:162px; border:solid 1px blue; float:left; margin:4px; text-align:center; margin: 0px 0px 3px 10px; border-radius: 5px;}
+.tensp{ height:40px; color:Blue; font-weight:bold; }
+.gia{ color:Red; padding:4px}
+.nutDatHang{ background-color:Black; color:Yellow; padding:5px;}
+.nhomsp{color:green; margin:10px 20px 10px 10px; padding: 5px; background-color:lightyellow; text-align: center; border-radius: 5px;}
+.motsp img{ border:none;}
+.chan{ clear:both; width:100%;}
+.hinh { width: 90px; height:120px;}
+/*Hang SX*/
+#hangsx a:link,#hangsx a:visited{ display:block; padding:5px; text-decoration:none; padding-left:5px; font-weight:bold; background-color:Black; color:Yellow; border-bottom:dashed 1px yellow}
+#hangsx a:hover{ color:Red}
+/*Gio hang*/
+.noidung a:link,.noidung a:visited{ text-decoration:none; color:blue}
+.noidung a:hover{ color:red}
+/*Menu*/
+#menu a:link,#menu a:visited{ text-decoration:none;color:Blue}
+#menu a:hover{ color:Red}
